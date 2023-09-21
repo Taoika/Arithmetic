@@ -7,7 +7,7 @@ class ExprGenerate:
     """
     四则运算式生成器。
     - 运算符1~3个，从[+、-、*、/]中选取，分别表示表示加减乘除的四则运算符。
-    - 运算数数量比运算符的数量多一个，为0到100之间的自然数或真分数。
+    - 操作数数量比运算符的数量多一个，为0到100之间的自然数或真分数。
     """
 
     def __init__(self):
@@ -21,7 +21,7 @@ class ExprGenerate:
         # 从加减乘除中随机选择k个
         return random.choices(['+', '-', '*', '/'], k=k)
 
-    # 定义一个函数，用于生成一个0到100之间的自然数或分数的运算数列表
+    # 定义一个函数，用于生成一个0到100之间的自然数或分数的操作数列表
     @staticmethod
     def random_numbers(k):
         nums = []
@@ -43,15 +43,15 @@ class ExprGenerate:
         # 随机决定运算符个数（1~3个）
         k = random.randint(1, 3)
 
-        # 随机生成两个运算符和三个运算数
+        # 随机生成两个运算符和三个操作数
         ops = self.random_operators(k)
         nums = self.random_numbers(k + 1)
 
-        # 拼接成一个表达式字符串，并转换为Sympy表达式对象
-        expr_str = ''
+        # 拼接成一个表达式字符串(开头结尾加空格方便匹配)
+        expr_str = ' '
         for i in range(k):
-            expr_str += f'{nums[i]} {ops[i]} '
-        expr_str += f'{nums[-1]}'
+            expr_str += f'({nums[i]}) {ops[i]} '  # 操作数两侧加括号，防止除以分数识别错误
+        expr_str += f'({nums[-1]}) '
         return expr_str
 
     def add_expression(self, expr_str):
