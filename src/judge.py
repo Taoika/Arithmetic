@@ -27,12 +27,12 @@ class ExprJudge:
                 return False
         return True
 
-    # def judge_repeat(self, expr_str):
-    #     expr_tree = srepr(parse_expr(expr_str, evaluate=False))  # 将表达式字符串转换为二叉树形式字符串
-    #     is_unique = expr_tree not in self.expr_trees  # 判断二叉树形式字符串是否已存在（即重复）
-    #     if is_unique:
-    #         self.expr_trees.append(expr_tree)
-    #     return is_unique
+    def judge_repeat(self, expr_str):
+        expr_tree = srepr(parse_expr(expr_str, evaluate=False))  # 将表达式字符串转换为二叉树形式字符串
+        is_unique = expr_tree not in self.expr_trees  # 判断二叉树形式字符串是否已存在（即重复）
+        if is_unique:
+            self.expr_trees.append(expr_tree)
+        return is_unique
 
     def judge(self, expr_str):
-        return self.judge_illegal(expr_str) and self.judge_negative(expr_str)
+        return self.judge_illegal(expr_str) and self.judge_negative(expr_str) and self.judge_repeat(expr_str)
