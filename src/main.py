@@ -13,8 +13,8 @@ while eg.count < 10:
     expr_str = eg.generate()
 
     # 检查表达式是否符合要求，如果是，就将其添加到列表中，并增加计数器
-    # if ej.judge(expr_str):
-    eg.add_expression(expr_str)
+    if ej.judge(expr_str):
+        eg.add_expression(expr_str)
 
 # 打印生成的四则运算表达式
 for i, expr in enumerate(eg.expressions):
