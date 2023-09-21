@@ -1,6 +1,6 @@
 import random
 from random import randrange
-from sympy import Integer, Rational
+from sympy import Integer, Rational, sympify
 
 
 class ExprGenerate:
@@ -56,4 +56,5 @@ class ExprGenerate:
 
     def add_expression(self, expr_str):
         self.expressions.append(expr_str)
+        self.results.append(sympify(expr_str))
         self.count += 1

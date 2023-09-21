@@ -1,6 +1,5 @@
 from generate import ExprGenerate
 from judge import ExprJudge
-from sympy import *
 
 # 实例化四则运算式生成器
 eg = ExprGenerate()
@@ -16,6 +15,10 @@ while eg.count < 10:
     if ej.judge(expr_str):
         eg.add_expression(expr_str)
 
+print(len(eg.expressions))
+print(len(eg.results))
+print(len(ej.expr_trees))
+
 # 打印生成的四则运算表达式
-for i, expr in enumerate(eg.expressions):
-    print(f'{i + 1}: {expr} = {simplify(expr)}')
+for i, (expr, result) in enumerate(zip(eg.expressions, eg.results)):
+    print(f'{i + 1}: {expr} = {result}')
