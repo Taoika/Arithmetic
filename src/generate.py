@@ -53,3 +53,7 @@ class ExprGenerate:
             expr_str += f'{nums[i]} {ops[i]} '
         expr_str += f'{nums[-1]}'
         return expr_str
+
+    def add_expression(self, expr_str):
+        self.expressions.append(expr_str)
+        self.count += 1
