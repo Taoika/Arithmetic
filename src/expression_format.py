@@ -40,8 +40,8 @@ class ExprFormat:
 
     def expr_format(self, expressions):
         expressions = list(map(self.match_expression, expressions))
-        return list(map(lambda x: f'{x[0] + 1}. {x[1]}', enumerate(expressions)))
+        return list(map(lambda x: f'{x[0] + 1}. {x[1]}\n', enumerate(expressions)))
 
     def result_format(self, results):
         results = list(map(self.match_result, results))
-        return list(map(lambda x: f'{x[0] + 1}. {x[1]}', enumerate(results)))
+        return list(map(lambda x: f'{x[0] + 1}. {x[1]}\n', enumerate(results)))

@@ -1,6 +1,7 @@
 from generate import ExprGenerate
 from judge import ExprJudge
 from expression_format import ExprFormat
+from files import *
 
 # 实例化四则运算式生成器
 eg = ExprGenerate()
@@ -8,7 +9,7 @@ eg = ExprGenerate()
 # 实例化四则运算式判别器
 ej = ExprJudge()
 
-# 循环生成表达式，直到达到10条或超时为止
+# 循环生成表达式，直到达到指定数量
 while eg.count < 10:
     expr_str = eg.generate()
 
@@ -25,8 +26,10 @@ ef = ExprFormat()  # 实例化格式化器
 expressions = ef.expr_format(eg.expressions)  # 格式化运算式
 results = ef.result_format(eg.results)  # 格式化结果
 
-
 # 打印生成的四则运算表达式
 for expr, result in zip(expressions, results):
     print(f'{expr}')
     print(f'{result}')
+
+# 保存文件
+save_files(expressions, results)
