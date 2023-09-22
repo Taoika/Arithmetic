@@ -7,10 +7,11 @@ class ExprGenerate:
     """
     四则运算式生成器。
     - 运算符1~3个，从[+、-、*、/]中选取，分别表示表示加减乘除的四则运算符。
-    - 操作数数量比运算符的数量多一个，为0到100之间的自然数或真分数。
+    - 操作数数量比运算符的数量多一个，为0到limit之间的自然数或真分数。
     """
 
-    def __init__(self):
+    def __init__(self, limit):
+        self.limit = limit  # 初始化操作数大小上限
         self.expressions = []  # 初始化表达式列表
         self.results = []  # 初始化结果列表
         self.count = 0  # 初始化已经生成的表达式的数量
@@ -22,18 +23,17 @@ class ExprGenerate:
         return random.choices(['+', '-', '*', '/'], k=k)
 
     # 定义一个函数，用于生成一个0到100之间的自然数或分数的操作数列表
-    @staticmethod
-    def random_numbers(k):
+    def random_numbers(self, k):
         nums = []
         for _ in range(k):
             # 以一半的概率生成一个自然数，以一半的概率生成一个分数
             if randrange(2) == 0:
-                # 生成一个0到100之间的自然数
-                nums.append(Integer(randrange(101)))
+                # 生成一个0到limit之间的自然数
+                nums.append(Integer(randrange(self.limit)))
             else:
                 # 生成一个分数
-                numerator = Integer(randrange(1, 11))
-                denominator = Integer(randrange(1, 11))
+                numerator = Integer(randrange(1, self.limit))
+                denominator = Integer(randrange(1, self.limit))
                 fraction = Rational(numerator, denominator)
                 nums.append(fraction.cancel())  # 对分数进行化简
         return nums
