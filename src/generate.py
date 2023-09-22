@@ -1,6 +1,6 @@
 import random
 from random import randrange
-from sympy import Integer, Rational, sympify
+from sympy import Integer, Rational, sympify, S
 
 
 class ExprGenerate:
@@ -55,6 +55,8 @@ class ExprGenerate:
         return expr_str
 
     def add_expression(self, expr_str):
-        self.expressions.append(expr_str)
-        self.results.append(str(sympify(expr_str)))
-        self.count += 1
+        result = sympify(expr_str)
+        if result != S.ComplexInfinity:  # 判别非法运算式（除数为0）
+            self.expressions.append(expr_str)
+            self.results.append(str(result))
+            self.count += 1
