@@ -1,5 +1,6 @@
 from generate import ExprGenerate
 from judge import ExprJudge
+from expression_format import ExprFormat
 
 # 实例化四则运算式生成器
 eg = ExprGenerate()
@@ -19,6 +20,12 @@ print(len(eg.expressions))
 print(len(eg.results))
 print(len(ej.expr_trees))
 
+# 字符串表达式列表处理
+ef = ExprFormat()  # 实例化格式化器
+expressions = ef.expr_format(eg.expressions)  # 格式化运算式
+results = ef.result_format(eg.results)  # 格式化结果
+
+
 # 打印生成的四则运算表达式
-for i, (expr, result) in enumerate(zip(eg.expressions, eg.results)):
+for i, (expr, result) in enumerate(zip(expressions, results)):
     print(f'{i + 1}: {expr} = {result}')
