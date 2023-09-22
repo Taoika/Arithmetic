@@ -48,10 +48,10 @@ class ExprGenerate:
         nums = self.random_numbers(k + 1)
 
         # 拼接成一个表达式字符串(开头结尾加空格方便匹配)
-        expr_str = ' '
+        expr_str = ''
         for i in range(k):
             expr_str += f'({nums[i]}) {ops[i]} '  # 操作数两侧加括号，防止除以分数识别错误
-        expr_str += f'({nums[-1]}) '
+        expr_str += f'({nums[-1]})'
         return expr_str
 
     def add_expression(self, expr_str):

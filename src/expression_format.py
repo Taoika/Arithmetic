@@ -39,7 +39,8 @@ class ExprFormat:
         return result_str
 
     def expr_format(self, expressions):
-        return list(map(self.match_expression, expressions))
+        expressions = list(map(self.match_expression, expressions))
+        return list(map(lambda x: f'{x[0] + 1}. {x[1]}', enumerate(expressions)))
 
     def result_format(self, results):
         return list(map(self.match_result, results))

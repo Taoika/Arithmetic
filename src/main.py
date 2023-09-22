@@ -27,5 +27,5 @@ results = ef.result_format(eg.results)  # 格式化结果
 
 
 # 打印生成的四则运算表达式
-for i, (expr, result) in enumerate(zip(expressions, results)):
-    print(f'{i + 1}: {expr} = {result}')
+for expr, result in zip(expressions, results):
+    print(f'{expr} = {result}')
