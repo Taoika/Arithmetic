@@ -28,4 +28,5 @@ results = ef.result_format(eg.results)  # 格式化结果
 
 # 打印生成的四则运算表达式
 for expr, result in zip(expressions, results):
-    print(f'{expr} = {result}')
+    print(f'{expr}')
+    print(f'{result}')
