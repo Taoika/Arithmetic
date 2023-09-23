@@ -50,11 +50,11 @@ if all([args.n, args.r]) and not all([args.e, args.a]):  # 生成四则运算式
 elif not all([args.n, args.r]) and all([args.e, args.a]):  # 批改评分
     # 读文件
     expressions, results = read_files(args.e, args.a)
+    # 逆格式化
+    erf = ExprReverFormat()
+    expressions = erf.expr_reverse_format(expressions)
+    results = erf.result_reverse_format(results)
     print(expressions)
     print(results)
-    # 逆格式化
-    # erf = ExprReverFormat()
-    # erf.expr_reverse_format(expressions)
-    # erf.result_reverse_format(results)
 else:  # 参数错误
     print("ERROR: 参数输入错误。请检查输入参数，仅能出现-n -r 或 -e -a 的输入参数组合。")
