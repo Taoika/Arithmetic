@@ -39,8 +39,8 @@ class ExprGenerate:
                 nums.append(Integer(randrange(self.limit)))
             else:
                 # 生成一个分数
-                numerator = Integer(randrange(1, self.limit))
-                denominator = Integer(randrange(1, self.limit))
+                numerator = Integer(randrange(1, self.limit / 5))
+                denominator = Integer(randrange(1, self.limit / 5))
                 fraction = Rational(numerator, denominator).cancel()  # 对分数进行化简
                 if fraction.is_integer:
                     nums.append(fraction)  # 整数直接添加
