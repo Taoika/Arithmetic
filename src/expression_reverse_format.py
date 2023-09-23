@@ -16,24 +16,23 @@ class ExprReverFormat:
         numerator_new = quotient * denominator + numerator  # 计算新分子
         return f"{numerator_new}/{denominator}"  # 返回假分数形式(顺便添加括号防止除以分数识别出错)
 
-    def match_result(self, result_str):
+    def match_common(self, s):
         # 去除开头标号
-        result_str = re.sub(r"\d+\.\s", "", result_str)
+        s = re.sub(r"\d+\.\s", "", s)
         # 去除结尾换行
-        result_str = re.sub(r"\n", "", result_str)
+        s = re.sub(r"\n", "", s)
         # 替换带分数为假分数
-        result_str = re.sub(r"(\d+)'(\d+)/(\d+)", self.mixed_to_fraction, result_str)
+        s = re.sub(r"(\d+)'(\d+)/(\d+)", self.mixed_to_fraction, s)
         # 返回处理结果
-        return result_str
+        return s
+
+    def match_result(self, result_str):
+        return self.match_common(result_str)
 
     def match_expression(self, expr_str):
-        # 去除开头标号
-        expr_str = re.sub(r"\d+\.\s", "", expr_str)
-        # 去除结尾换行
-        expr_str = re.sub(r"\n", "", expr_str)
-        # 替换带分数为假分数
-        expr_str = re.sub(r"(\d+)'(\d+)/(\d+)", self.mixed_to_fraction, expr_str)
-        expr_str = re.sub(r"(\d+)/(\d+)", lambda m: f"({m.groups()[0]}/{m.groups()[1]})", expr_str)  # 添加括号
+        expr_str = self.match_common(expr_str)
+        # 分数两侧添加括号
+        expr_str = re.sub(r"(\d+)/(\d+)", lambda m: f"({m.groups()[0]}/{m.groups()[1]})", expr_str)
         # 替换全部乘号
         expr_str = re.sub(r"x", "*", expr_str)
         # 替换全部除号

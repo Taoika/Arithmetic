@@ -19,6 +19,12 @@ class ExprFormat:
         else:  # 如果不是假分数
             return match.group()  # 返回原样
 
+    def match_common(self, s):
+        # 替换假分数为带分数
+        s = re.sub(r"(\d+)/(\d+)", self.fraction_to_mixed, s)
+        # 返回处理结果
+        return s
+
     def match_expression(self, expr_str):
         # 替换全部乘号
         expr_str = re.sub(r"\*", "x", expr_str)
@@ -26,20 +32,10 @@ class ExprFormat:
         expr_str = re.sub(r"\s/\s", " ÷ ", expr_str)
         # 去除分数的冗余括号
         expr_str = re.sub(r"\((\d+/\d+)\)", lambda m: m.groups()[0], expr_str)
-
-        # expr_str = re.sub(r"\(\d", lambda m: m.group()[1], expr_str)  # 去除数字左括号‘(’
-        # expr_str = re.sub(r"\d\)", lambda m: m.group()[0], expr_str)  # 去除数字左括号‘)’
-        
-        # 替换假分数为带分数
-        expr_str = re.sub(r"(\d+)/(\d+)", self.fraction_to_mixed, expr_str)
-        # 返回处理结果
-        return expr_str
+        return self.match_common(expr_str)
 
     def match_result(self, result_str):
-        # 替换假分数为带分数
-        result_str = re.sub(r"(\d+)/(\d+)", self.fraction_to_mixed, result_str)
-        # 返回处理结果
-        return result_str
+        return self.match_common(result_str)
 
     def expr_format(self, expressions):
         expressions = list(map(self.match_expression, expressions))
