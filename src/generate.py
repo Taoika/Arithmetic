@@ -16,14 +16,21 @@ class ExprGenerate:
         self.results = []  # 初始化结果列表
         self.count = 0  # 初始化已经生成的表达式的数量
 
-    # 定义一个函数，用于生成一个四则运算符列表
     @staticmethod
     def random_operators(k):
-        # 从加减乘除中随机选择k个
-        return random.choices(['+', '-', '*', '/'], k=k)
+        """
+        生成一个四则运算符列表
+        :param k: 随机生成四则运算符个数
+        :return: 四则运算符列表
+        """
+        return random.choices(['+', '-', '*', '/'], k=k)  # 从加减乘除中随机选择k个
 
-    # 定义一个函数，用于生成一个0到100之间的自然数或分数的操作数列表
     def random_numbers(self, k):
+        """
+        生成一个操作数列表，操作数大小由self.limit限制。
+        :param k: 随机生成操作数个数
+        :return: 操作数列表
+        """
         nums = []
         for _ in range(k):
             # 以一半的概率生成一个自然数，以一半的概率生成一个分数
@@ -43,6 +50,10 @@ class ExprGenerate:
 
     # 生成表达式
     def generate(self):
+        """
+        组合生成四则运算表达式。
+        :return: 四则运算表达式字符串
+        """
         # 随机决定运算符个数（1~3个）
         k = random.randint(1, 3)
 
@@ -50,7 +61,7 @@ class ExprGenerate:
         ops = self.random_operators(k)
         nums = self.random_numbers(k + 1)
 
-        # 拼接成一个表达式字符串(开头结尾加空格方便匹配)
+        # 拼接成一个表达式字符串
         expr_str = ''
         for i in range(k):
             expr_str += f'{nums[i]} {ops[i]} '
@@ -58,6 +69,11 @@ class ExprGenerate:
         return expr_str
 
     def add_expression(self, expr_str):
+        """
+        添加记录生成的表达式及其结果。
+        :param expr_str: 四则运算表达式字符串
+        :return: None
+        """
         result = sympify(expr_str)
         if result != S.ComplexInfinity:  # 判别非法运算式（除数为0）
             self.expressions.append(expr_str)
