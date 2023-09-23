@@ -1,4 +1,4 @@
-def save_files(expressions, results):
+def save_generate(expressions, results):
     """
     保存生成的四则运算式及其对应结果
     :param expressions: 格式化的四则运算式列表

@@ -25,4 +25,4 @@ class Grade:
         with open('Grade.txt', 'w') as f:
             f.write(f"Correct: {self.right_count} ({', '.join(list(map(str, self.right_list)))})\n")
             f.write(f"Wrong: {self.wrong_count} ({', '.join(list(map(str, self.wrong_list)))})\n")
-        print("批改结果已保存至当前目录下的Grade.txt文件。")
+
