@@ -3,6 +3,7 @@ from generate import ExprGenerate
 from judge import ExprJudge
 from expression_format import ExprFormat
 from expression_reverse_format import ExprReverFormat
+from grade import Grade
 from files import *
 
 # 命令行参数
@@ -54,7 +55,11 @@ elif not all([args.n, args.r]) and all([args.e, args.a]):  # 批改评分
     erf = ExprReverFormat()
     expressions = erf.expr_reverse_format(expressions)
     results = erf.result_reverse_format(results)
-    print(expressions)
-    print(results)
+    # 实例化打分器
+    g = Grade(expressions)
+    # 批改打分
+    g.get_grade(results)
+    # 保存打分文件
+    g.save_grade()
 else:  # 参数错误
     print("ERROR: 参数输入错误。请检查输入参数，仅能出现-n -r 或 -e -a 的输入参数组合。")
