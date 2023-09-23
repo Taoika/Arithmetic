@@ -34,8 +34,11 @@ class ExprGenerate:
                 # 生成一个分数
                 numerator = Integer(randrange(1, self.limit))
                 denominator = Integer(randrange(1, self.limit))
-                fraction = Rational(numerator, denominator)
-                nums.append(fraction.cancel())  # 对分数进行化简
+                fraction = Rational(numerator, denominator).cancel()  # 对分数进行化简
+                if fraction.is_integer:
+                    nums.append(fraction)  # 整数直接添加
+                else:
+                    nums.append(f"({fraction})")  # 分数转换成字符串并两侧添加括号，防止除以分数识别错误
         return nums
 
     # 生成表达式
@@ -50,8 +53,8 @@ class ExprGenerate:
         # 拼接成一个表达式字符串(开头结尾加空格方便匹配)
         expr_str = ''
         for i in range(k):
-            expr_str += f'({nums[i]}) {ops[i]} '  # 操作数两侧加括号，防止除以分数识别错误
-        expr_str += f'({nums[-1]})'
+            expr_str += f'{nums[i]} {ops[i]} '
+        expr_str += f'{nums[-1]}'
         return expr_str
 
     def add_expression(self, expr_str):

@@ -30,7 +30,7 @@ if all([args.n, args.r]) and not all([args.e, args.a]):  # 生成四则运算式
         if ej.judge(expr_str):
             eg.add_expression(expr_str)
 
-    # print(len(eg.expressions))
+    print(eg.expressions)
     # print(len(eg.results))
     # print(len(ej.expr_trees))
 
@@ -40,9 +40,9 @@ if all([args.n, args.r]) and not all([args.e, args.a]):  # 生成四则运算式
     results = ef.result_format(eg.results)  # 格式化结果
 
     # 打印生成的四则运算表达式
-    # for expr, result in zip(expressions, results):
-    #     print(f'{expr}')
-    #     print(f'{result}')
+    for expr, result in zip(expressions, results):
+        print(f'{expr}')
+        print(f'{result}')
 
     # 保存文件
     save_files(expressions, results)
