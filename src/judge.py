@@ -22,7 +22,10 @@ class ExprJudge:
         """
         expr = parse_expr(expr_str, evaluate=False)  # 转换为表达式对象
         for sub_expr in preorder_traversal(expr):  # 遍历子表达式
-            if sub_expr.func == Add and sympify((srepr(sub_expr))) < 0:  # 筛选多项式（乘除不可能生成负数）并计算中间结果
+            try:
+                if sub_expr.func == Add and sympify((srepr(sub_expr))) < 0:  # 筛选多项式（乘除不可能生成负数）并计算中间结果
+                    return False
+            except TypeError:  # 除数为零引发的异常
                 return False
         return True
 
