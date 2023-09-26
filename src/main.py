@@ -9,14 +9,14 @@ from files import *
 
 class NAction(argparse.Action):
     def __call__(self, para, namespace, values, option_string=None):
-        if values < 1 or values > 10000:
+        if values not in list(range(1, 10001)):
             print('ValueError: n 参数必须为区间[1, 10000]内的整数。')
             exit(1)
 
 
 class RAction(argparse.Action):
     def __call__(self, para, namespace, values, option_string=None):
-        if values < 1 or values > 100:
+        if values not in list(range(1, 101)):
             print('ValueError: r 参数必须为区间[1, 100]内的整数。')
             exit(1)
 
