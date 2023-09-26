@@ -80,5 +80,4 @@ def main():
         print("ERROR: 参数输入错误。请检查输入参数，仅能出现-n -r 或 -e -a 的输入参数组合。")
 
 
-if __name__ == '__main__':
-    main()
+main()

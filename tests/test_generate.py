@@ -4,7 +4,7 @@ from src import ExprGenerate
 
 class TestGenerate(unittest.TestCase):
     # 初始化
-    def test_init(self):
+    def test_gen_init(self):
         limit = 100
         eg = ExprGenerate(limit)
         self.assertEqual(eg.limit, limit)
