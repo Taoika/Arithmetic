@@ -6,11 +6,26 @@ from expression_reverse_format import ExprReverFormat
 from grade import Grade
 from files import *
 
+
+class NAction(argparse.Action):
+    def __call__(self, para, namespace, values, option_string=None):
+        if values < 1 or values > 10000:
+            print('ValueError: n 参数必须为区间[1, 10000]内的整数。')
+            exit(1)
+
+
+class RAction(argparse.Action):
+    def __call__(self, para, namespace, values, option_string=None):
+        if values < 1 or values > 100:
+            print('ValueError: r 参数必须为区间[1, 100]内的整数。')
+            exit(1)
+
+
 # 命令行参数
 parser = argparse.ArgumentParser()
-parser.add_argument("-n", type=int, choices=range(1, 10001), default=None,
+parser.add_argument("-n", type=int, default=None, action=NAction,
                     help="The number of generated four arithmetic expressions.")
-parser.add_argument("-r", type=int, choices=range(1, 101), default=None,
+parser.add_argument("-r", type=int, default=None, action=RAction,
                     help="The range of operands.")
 parser.add_argument("-e", default=None, help="The path of expressions file.")
 parser.add_argument("-a", default=None, help="The path of answers file.")
