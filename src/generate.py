@@ -48,6 +48,18 @@ class ExprGenerate:
                     nums.append(f"({fraction})")  # 分数转换成字符串并两侧添加括号，防止除以分数识别错误
         return nums
 
+    @staticmethod
+    def random_bracket(expr_str, k):
+        if randrange(2) == 0:  # 一半的概率添加一个括号
+            expr_str_split = expr_str.split(' ')
+            t = random.randint(0, k - 1)  # 第几个运算数
+            start = t * 2  # 左括号位置
+            end = random.randint(t + 1, k - 1 if start == 0 else k) * 2  # 右括号位置
+            expr_str_split[start] = '(' + expr_str_split[start]
+            expr_str_split[end] = expr_str_split[end] + ')'
+            expr_str = ' '.join(expr_str_split)
+        return expr_str
+
     # 生成表达式
     def generate(self):
         """
@@ -66,6 +78,12 @@ class ExprGenerate:
         for i in range(k):
             expr_str += f'{nums[i]} {ops[i]} '
         expr_str += f'{nums[-1]}'
+
+        # 随机加括号
+        if k > 1:
+            expr_str = self.random_bracket(expr_str, k)
+
+        # 返回生成结果
         return expr_str
 
     def add_expression(self, expr_str):
