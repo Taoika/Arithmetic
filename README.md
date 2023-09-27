@@ -1,4 +1,4 @@
-![Arithmetic](https://github.com/Taoika/Arithmetic/assets/108986990/4c755f1b-cacb-4a4f-ad98-1e5f683313ca)# Arithmetic
+# Arithmetic
 
 四则运算题目生成器
 
