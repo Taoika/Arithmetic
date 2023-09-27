@@ -80,13 +80,13 @@ $ vizviewer path/to/result.json
 
 ### tests
 
-1. 此文件夹是程序的测试部分
+此文件夹是程序的测试部分
 
 ### requirements.txt
 
-1. 程序的依赖文件
+程序的依赖文件
 
 ### .coveragerc
 
-2. coverage配置文件
+coverage配置文件
 
