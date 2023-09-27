@@ -52,7 +52,7 @@ class ExprReverFormat:
         """
         expr_str = self.match_common(expr_str)
         # 分数两侧添加括号
-        expr_str = re.sub(r"(\d+)/(\d+)", lambda m: f"({m.groups()[0]}/{m.groups()[1]})", expr_str)
+        expr_str = re.sub(r"(\d+/\d+)", lambda m: f"({m.groups()[0]})", expr_str)
         # 替换全部乘号
         expr_str = re.sub(r"x", "*", expr_str)
         # 替换全部除号
