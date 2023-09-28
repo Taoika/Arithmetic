@@ -18,7 +18,7 @@ class TestArgs(unittest.TestCase):
         self.assertIn("ERROR: 参数输入错误。请检查输入参数，仅能出现-n -r 或 -e -a 的输入参数组合", output)
 
     # 多余参数1
-    @patch('sys.argv', ['src/main.py', '-n', '10', '-r', '10', '-e', 'Exercises.txt'])
+    @patch('sys.argv', ['src/main.py', '-n', '10', '-r', '10', '-e', 'tests/test_file/Exercises.txt'])
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_lastArgs1(self, mock_stdout):
         main()
@@ -26,7 +26,8 @@ class TestArgs(unittest.TestCase):
         self.assertIn("成功保存生成的参考答案到当前路径下的文件", output)
 
     # 多余参数2
-    @patch('sys.argv', ['src/main.py', '-n', '10', '-e', 'Exercises.txt', '-a', 'Answers.txt'])
+    @patch('sys.argv', ['src/main.py', '-n', '10', '-e', 'tests/test_file/Exercises.txt', '-a', 'tests/test_file'
+                                                                                                '/Answers.txt'])
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_lastArgs2(self, mock_stdout):
         main()
@@ -44,7 +45,7 @@ class TestArgs(unittest.TestCase):
         self.assertIn("成功保存生成的参考答案到当前路径下的文件Answers.txt", output)
 
     # 部分错误答案
-    @patch('sys.argv', ['src/main.py', '-e', 'Exercises.txt', '-a', 'Answers_err.txt'])
+    @patch('sys.argv', ['src/main.py', '-e', 'tests/test_file/Exercises.txt', '-a', 'tests/test_file/Answers_err.txt'])
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_err_answers(self, mock_stdout):
         main()
@@ -55,7 +56,7 @@ class TestArgs(unittest.TestCase):
         self.assertIn("成功保存批改结果至当前目录下的Grade.txt文件", output)
 
     # 判对错的命令参数
-    @patch('sys.argv', ['src/main.py', '-e', 'Exercises.txt', '-a', 'Answers.txt'])
+    @patch('sys.argv', ['src/main.py', '-e', 'tests/test_file/Exercises.txt', '-a', 'tests/test_file/Answers.txt'])
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_grade_Args(self, mock_stdout):
         main()

@@ -58,7 +58,7 @@ class TestFile(unittest.TestCase):
         self.assertIn(f"成功取消文件 '{answer_path}' 为只读。", output)
 
     # 没有成绩文件写权限
-    @patch('sys.argv', ['src/main.py', '-e', 'Exercises.txt', '-a', 'Answers.txt'])
+    @patch('sys.argv', ['src/main.py', '-e', 'tests/test_file/Exercises.txt', '-a', 'tests/test_file/Answers.txt'])
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_grade_file(self, mock_stdout):
         grade_path = 'Grade.txt'
@@ -95,7 +95,7 @@ class TestFile(unittest.TestCase):
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_err_answerFile(self, mock_stdout):
         with self.assertRaises(SystemExit) as cm:
-            with patch('sys.argv', ['src/main.py', '-e', 'Exercises.txt', '-a', 'exercise.txt']):
+            with patch('sys.argv', ['src/main.py', '-e', 'tests/test_file/Exercises.txt', '-a', 'exercise.txt']):
                 main()
                 output = mock_stdout.getvalue().strip()
                 self.assertIn("ERROR: 读取文件错误。请检查输入参数路径是否存在", output)
@@ -106,7 +106,7 @@ class TestFile(unittest.TestCase):
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_err_exeFile(self, mock_stdout):
         with self.assertRaises(SystemExit) as cm:
-            with patch('sys.argv', ['src/main.py', '-e', 'exercise.txt', '-a', 'Answers.txt']):
+            with patch('sys.argv', ['src/main.py', '-e', 'exercise.txt', '-a', 'tests/test_file/Answers.txt']):
                 main()
                 output = mock_stdout.getvalue().strip()
                 self.assertIn("ERROR: 读取文件错误。请检查输入参数路径是否存在", output)
