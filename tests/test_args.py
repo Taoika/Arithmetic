@@ -85,12 +85,18 @@ class TestArgs(unittest.TestCase):
         self.assertIn("成功保存生成的四则运算式到当前路径下的文件Exercises.txt", output)
         self.assertIn("成功保存生成的参考答案到当前路径下的文件Answers.txt", output)
 
-    # # 10000
-    # @patch('sys.argv', ['src/main.py', '-n', '10000', '-r', '100'])
-    # @patch('sys.stdout', new_callable=io.StringIO)
-    # def test_gen_1000(self, mock_stdout):
-    #     main()
-    #     output = mock_stdout.getvalue().strip()
-    #     self.assertIn("正在保存生成的四则运算式及其结果到文件", output)
-    #     self.assertIn("成功保存生成的四则运算式到当前路径下的文件Exercises.txt", output)
-    #     self.assertIn("成功保存生成的参考答案到当前路径下的文件Answers.txt", output)
+    # 范围外参数n
+    def test_outRange_n(self):
+        with self.assertRaises(SystemExit) as cm:
+            with patch('sys.argv', ['src/main.py', '-n', '0', '-r', '0']):
+                main()
+
+        self.assertEqual(cm.exception.code, 1)
+
+    # 范围外参数r
+    def test_outRange_r(self):
+        with self.assertRaises(SystemExit) as cm:
+            with patch('sys.argv', ['src/main.py', '-n', '10', '-r', '0']):
+                main()
+
+        self.assertEqual(cm.exception.code, 1)
