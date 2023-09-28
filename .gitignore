@@ -1,0 +1,14 @@
+/node_modules
+/package.json
+/package-lock.json
+
+/src/Grade.txt
+/src/Exercises.txt
+/src/Answers.txt
+
+
+# 忽略Python字节码文件
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
